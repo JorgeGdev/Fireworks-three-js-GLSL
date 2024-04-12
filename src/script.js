@@ -27,6 +27,42 @@ const textureLoader = new THREE.TextureLoader()
 
 
 
+//SOUND FIREWORKS
+
+// Crear los elementos audio para cada archivo
+const audioElements = [
+    new Audio('./music/sound1.mp3'),
+    new Audio('./music/sound1.mp3'),
+    new Audio('./music/sound2.mp3')
+];
+
+// Configurar todos los elementos para que no se reproduzcan automáticamente
+audioElements.forEach(audio => {
+    audio.autoplay = false;
+});
+
+
+window.addEventListener("click", function(event) {
+    // Seleccionar un índice aleatorio entre 0 y la longitud del array de audioElements - 1
+    const randomIndex = Math.floor(Math.random() * audioElements.length);
+
+    // Reproducir el sonido seleccionado aleatoriamente
+    const selectedAudio = audioElements[randomIndex];
+    selectedAudio.currentTime = 0; // Reiniciar el sonido si ya estaba reproduciéndose
+    selectedAudio.play();
+
+    // Continuar con la creación de fuegos artificiales
+    createRandomFirework();
+});
+
+
+
+
+
+
+
+
+
 /**
  * Sizes
  */
@@ -285,6 +321,11 @@ gui.add(skyParameters, 'azimuth', - 180, 180, 0.1).onChange(updateSky)
 gui.add(skyParameters, 'exposure', 0, 1, 0.0001).onChange(updateSky)
 
 updateSky()
+
+
+
+
+
 
 
 
